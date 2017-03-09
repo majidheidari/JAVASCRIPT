@@ -17,7 +17,7 @@ function setup() {
 }
 
 function draw() {
-  background(0, 100); //opacity
+  background(0, 150); //opacity
   streams.forEach(function(stream) {
     stream.render();
   })
