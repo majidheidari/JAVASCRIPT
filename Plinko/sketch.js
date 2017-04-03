@@ -1,0 +1,114 @@
+var Engine = Matter.Engine,
+  World = Matter.World,
+  Events = Matter.Events,
+  Bodies = Matter.Bodies;
+
+var engine;
+var world;
+var particles = [];
+var plinkos = [];
+
+var bounds = [];
+var cols = 11;
+var rows = 10;
+//var mysong;
+//var mysong2;
+
+function preload() {
+  //mysong = loadSound("frog.mp3");
+  //mysong2 = loadSound(".mp3");
+}
+
+function setup() {
+  createCanvas (600,700);
+//  mysong.setVolume(0.1);
+//  mysong.play();
+  colorMode(HSB);
+  engine = Engine.create();
+  world = engine.world;
+
+  function collision(event) {
+    var pairs = event.pairs;
+    for (var i = 0; i < pairs.length; i++) {
+      var labelA = pairs[i].bodyA.label;
+      var labelB = pairs[i].bodyB.label;
+
+      if (labelA == 'particle' && labelB == 'plinko' ) {
+      //  mysong.play();
+      }
+      if (labelA == 'plinko' && labelB == 'particle' ) {
+      //  mysong.play();
+      }
+      if (labelA == 'particle' && labelB == 'rectangle' ) {
+      //  mysong.play();
+      }
+      if (labelA == 'rectangle' && labelB == 'particle' ) {
+      //  mysong.play();
+      }
+    }
+
+  }
+
+  Events.on(engine, 'collisionStart', collision )
+
+
+  newParticle();
+  var spacing = width / cols;
+  for (var j = 0; j < rows; j++){
+    for (var i = 0; i < cols + 1; i++){
+      var x = i * spacing;
+      if ( j % 2 == 0){
+        x += spacing / 2;
+      }
+      var y = spacing + j * spacing;
+      var p = new Plinko(x, y, 8);
+      plinkos.push(p);
+    }
+
+  }
+
+  var b = new Boundary(width/2, height + 50, width, 100);
+  bounds.push(b);
+
+  for (var i = 0; i < cols + 1; i++){
+    var x = i * spacing;
+    var h = 100;
+    var w = 10;
+    var y = height - h / 2;
+    var b = new Boundary(x, y, w, h);
+    bounds.push(b);
+  }
+}
+
+function newParticle(){
+  var p = new Particle(300, 0, 15);
+
+  particles.push(p);
+}
+
+function draw() {
+  if (frameCount % 60 == 0 ){
+    newParticle();
+  }
+
+  background(0, 0, 0);
+  Engine.update(engine, 1000 / 45);
+  for( var i = 0; i < particles.length; i++) {
+    particles[i].show();
+    if (particles[i].offScreen()){
+      World.remove(world, particles[i].body);
+      particles.splice(i, 1);
+      i--;
+    }
+  }
+
+  for( var i = 0; i < plinkos.length; i++) {
+    plinkos[i].show();
+  }
+  for (var i = 0; i < bounds.length; i++){
+    bounds[i].show();
+  }
+
+
+
+}
