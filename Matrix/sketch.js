@@ -3,7 +3,7 @@ var streams = [];
 
 
 function setup() {
-  createCanvas (window.innerWidth,window.innerHeight);
+  createCanvas (window.innerWidth*1.2,window.innerHeight*1.2);
     textSize(symbolSize);
     var x = 0;
     for ( var i = 0; i <= width / symbolSize; i++) {
