@@ -4,7 +4,7 @@ tetrisLocal.element.classList.add('local');
 tetrisLocal.run();
 
 const connectionManager = new ConnectionManager(tetrisManager);
-connectionManager.connect();
+connectionManager.connect(); //TODO: do zatvoriek pripojenie na server
 
 const keyListener = (event) => {
     [
