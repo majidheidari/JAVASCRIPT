@@ -4,7 +4,7 @@ function Particle() {
   this.pos = createVector(random(width - scl), random(height - scl));
   this.vel = createVector(0, 0);
   this.acc = createVector(0, 0);
-  this.maxspeed = 1;
+  this.maxspeed = 2;
   this.weight = 0;
 
 

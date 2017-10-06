@@ -33,7 +33,7 @@ function setup() {
 
 }
 function draw() {
-  background(0, 0.01);
+  //background(0, 0.01);
   //scl = slider.value();
   cols = floor(width / scl);
   rows = floor(height / scl);
