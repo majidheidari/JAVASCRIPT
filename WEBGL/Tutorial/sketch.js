@@ -1,37 +1,24 @@
 let angle = 0;
 
-let Pablo;
-let cam;
+//https://gist.github.com/simon-tiger/06e865e3012e854e555c0c97757c74d5
 
-function preload() {
-	Pablo = loadImage('img/Pablo.jpg');
-
-}
+let graphics;
 
 function setup() {
   createCanvas (400,400, WEBGL);
-  cam = createCapture(VIDEO);
-  cam.size(400, 400);
-  cam.hide();
 
+  graphics = createGraphics(200, 200);
 }
 
 function draw() {
-  background(51);	
+  background(0);
+  ambientLight(100);
+  directionalLight(255, 255, 255, 0, 0, 1);
 
-  let x = mouseX - width / 2;
-  let y = mouseY - height / 2;
-  let v = createVector(x, y, 0);
-  v.normalize(); 
+  rotateX(angle);
+  rotateY(angle * 1.3);
+  rotateZ(angle * 0.7);
+  box(100);
 
-  directionalLight(255, 255, 255, v);
-  ambientLight(150);
-
-  rotateY(angle);
-  angle += 0.01;
-
-
-  texture(cam);
-  plane(100);
-  noStroke();
+  angle += 0.03;
 }
